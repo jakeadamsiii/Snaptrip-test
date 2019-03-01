@@ -2,11 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
     <title>SnapTrip Test Jake Adams</title>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/app.js" charset="utf-8"></script>
+
   </head>
   <body>
-
+    <div id="map"></div>
+    <div id="right-panel">
+      <h2>Results</h2>
+      <ul id="places"></ul>
+      <button id="more">More results</button>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU&libraries=places&callback=initMap"
+      type="text/javascript"></script>
+    <script src="js/app.js" charset="utf-8"></script>
   </body>
 </html>
