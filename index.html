@@ -5,16 +5,17 @@
     <meta name="viewport" content="initial-scale=1.0">
     <title>SnapTrip Test Jake Adams</title>
     <link rel="stylesheet" href="css/style.css">
-
   </head>
   <body>
-    <div id="map"></div>
-    <div id="right-panel">
-      <h2>Results</h2>
-      <ul id="places"></ul>
-      <button id="more">More results</button>
-    </div>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU&libraries=places&callback=initMap"
+    <section class="map-container">
+      <div id="google-reviews"></div>
+    </section>
+    <section class="places">
+      <ul class="places__list">
+      </ul>
+    </section>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU&libraries=places"
       type="text/javascript"></script>
     <script src="js/app.js" charset="utf-8"></script>
   </body>

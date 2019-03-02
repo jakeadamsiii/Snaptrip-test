@@ -1,65 +1,32 @@
-#map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
 
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
+.map-container {
+  width: 50%;
+  height: 100%;
+  float: left;
+  position: fixed; }
+  .map-container #map {
+    width: 100%;
+    height: 100%; }
 
-      #right-panel select {
-        width: 100%;
-      }
+.places {
+  width: 50%;
+  height: 100%;
+  float: right; }
+  .places__list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly; }
+  .places__card {
+    background: #eee;
+    width: 48%;
+    height: 200px;
+    margin-top: 5px; }
 
-      #right-panel i {
-        font-size: 12px;
-      }
-      #right-panel {
-        font-family: Arial, Helvetica, sans-serif;
-        position: absolute;
-        right: 5px;
-        top: 60%;
-        margin-top: -195px;
-        height: 330px;
-        width: 200px;
-        padding: 5px;
-        z-index: 5;
-        border: 1px solid #999;
-        background: #fff;
-      }
-      h2 {
-        font-size: 22px;
-        margin: 0 0 5px 0;
-      }
-      ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        height: 271px;
-        width: 200px;
-        overflow-y: scroll;
-      }
-      li {
-        background-color: #f1f1f1;
-        padding: 10px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      li:nth-child(odd) {
-        background-color: #fcfcfc;
-      }
-      #more {
-        width: 100%;
-        margin: 5px 0 0 0;
-      }
+/*# sourceMappingURL=style.css.map */
