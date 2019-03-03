@@ -100,6 +100,16 @@ function formatUrl(){
             	else if (d<=1) return Math.round(d*1000)+"m";
             	return d;
             }
+            var ratingContent ='';
+            if(place.rating){
+              ratingContent =`
+              <p class="places__rating">
+                ${place.rating}
+                <img class="places__rating-star" src="../star.png" alt="stars">
+                <span class="places__rating-total"> (${place.user_ratings_total})</span>
+              </p>
+              `
+            }
 
              if(website){
                placeContent = `
@@ -109,12 +119,10 @@ function formatUrl(){
                       <div class='places__info'>
                         <p class="places__location">${place.vicinity}</p>
                         <h4 class="places__name">${place.name}</h4>
-                        <p class="places__distance">${distanceFromMe} away</p>
-                        <p class="places__rating">
-                          ${place.rating}
-                          <img class="places__rating-star" src="../star.png" alt="stars">
-                          <span class="places__rating-total"> (${place.user_ratings_total})</span>
-                        </p>
+                        <div class="places__distance-info-box">
+                            ${ratingContent}
+                          <p class="places__distance">${distanceFromMe} away</p>
+                        </div>
                         <ul class="places__type-list">
                           ${newArr.join('')}
                         </ul>
@@ -129,12 +137,10 @@ function formatUrl(){
                  <div class='places__info'>
                    <p class="places__location">${place.vicinity}</p>
                    <h4 class="places__name">${place.name}</h4>
+                   <div class="places__distance-info-box">
+                   ${ratingContent}
                    <p class="places__distance">${distanceFromMe} away</p>
-                   <p class="places__rating">
-                     ${place.rating}
-                     <img class="places__rating-star" src="../star.png" alt="stars">
-                     <span class="places__rating-total"> (${place.user_ratings_total})</span>
-                   </p>
+                 </div>
                    <ul class="places__type-list">
                      ${newArr.join('')}
                    </ul>
@@ -143,6 +149,13 @@ function formatUrl(){
              }
 
               document.querySelector('.places__list').insertAdjacentHTML('afterbegin', placeContent);
+              setTimeout(function(){
+                document.querySelector('.loading').classList.add('loading--inactive');
+                //after loading fade animation end
+                setTimeout(function(){
+                  document.querySelector('.loading').classList.add('loading--stopped');
+                },1000);
+              }, 2000);
            }
 
          });
@@ -177,6 +190,5 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(success, error, options);
   });
 }
-
 
 formatUrl();

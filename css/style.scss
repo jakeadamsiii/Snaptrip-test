@@ -1,8 +1,17 @@
+$grey: #666;
+$brandColour: #FF5722;
+$gradientColour: #FF5722;
+$uniformMargin: 5px;
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Karla', sans-serif;
+}
+
+body{
+  background:#eee;
 }
 
 p, h4, span, ul, li{
@@ -20,13 +29,20 @@ a{
   height: 100%;
 
   &__info{
-    height:200px;
     padding-left: 10px;
+  }
+
+  &__name{
+    margin: $uniformMargin 0 0;
+    font-size: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__list{
     padding:0;
-    margin:0;
+    margin:10px 0 20px;
     list-style: none;
     display:flex;
     flex-wrap: wrap;
@@ -34,29 +50,288 @@ a{
   }
 
   &__card{
-    background: #eee;
     width:48%;
-    height:400px;
-    margin-top:5px;
+    background: #fefefe;
+    margin-top:$uniformMargin;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    transform:none;
+    transition: all 0.25s ease;
+    &:hover, &:focus-within{
+      transform: scale(1.01);
+      box-shadow: 0px 3px 15px rgba(0,0,0,0.4);
+    }
   }
 
   &__image{
     width:100%;
-    height:200px;
+    height:280px;
     background-image: url('../London-Eye-2009.jpg');
     background-size: cover;
     background-position: center;
   }
 
   &__location{
-    color: #666;
+    color: $grey;
     font-size: 13px;
     text-transform: uppercase;
+    margin:$uniformMargin 0 0;
+  }
+
+  &__distance{
+    font-size: 14px;
+    color: $brandColour;
+    &-info-box{
+      display: flex;
+      justify-content: start;
+      align-items: baseline;
+      margin-top: $uniformMargin;
+    }
   }
 
   &__rating{
+    margin-right:25px;
     &-star{
       height:10px;
     }
+  }
+
+  &__type{
+    color:$grey;
+    margin:$uniformMargin;
+    padding: 2px 10px;
+    border-radius: 5px;
+    border: 2px solid $grey;
+    cursor: pointer;
+    transform:none;
+    transition: all 0.2s ease;
+    &:hover{
+      transform:scale(1.05);
+      color: black;
+      border: 2px solid black;
+    }
+
+    &:first-child{
+      margin-left:0;
+    }
+    &-list{
+      list-style: none;
+      display: flex;
+      justify-content: end;
+    }
+  }
+
+}
+
+.loading{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  background-color: #eee;
+  z-index: 99;
+  opacity: 1;
+  transition: opacity 1s ease;
+  &--inactive{
+    opacity: 0;
+  }
+  &--stopped{
+    display: none;
+  }
+}
+
+//spinner styles
+.loading-spinner {
+  position : absolute;
+  top      : 50%;
+  left     : 50%;
+  -webkit-transform : translateX(-50%) translateY(-50%);
+     -moz-transform : translateX(-50%) translateY(-50%);
+          transform : translateX(-50%) translateY(-50%);
+}
+
+.dot {
+  background    : black;
+  border-radius : 100%;
+  color         : white;
+  height        : 8px;
+  line-height   : 8px;
+  text-align    : center;
+  width         : 8px;
+}
+
+.dotOne {
+  -webkit-animation : dotOneKeyframes 5s ease  infinite;
+  background        : $brandColour;
+  position          : absolute;
+  top               : 0;
+  left              : 0;
+}
+
+.dotTwo {
+  -webkit-animation : dotTwoKeyframes 5s ease 0.4166666666666s infinite;
+  background        : $brandColour;
+  position          : absolute;
+  top               : 0;
+  left              : 14px;
+}
+
+.dotThree {
+  -webkit-animation : dotThreeKeyframes 5s ease 0.83333333333s infinite;
+  background        : $brandColour;
+  position          : absolute;
+  top               : 14px;
+  left              : 14px;
+}
+
+@-webkit-keyframes dotOneKeyframes {
+  0% {
+    top  : 0;
+    left : 0;
+  }
+  8.3333333333% {
+    top  : 14px;
+    left : 0;
+  }
+  16.6666666666% {
+
+  }
+  25% {
+    top  : 14px;
+    left : 0;
+  }
+  33.3333333333% {
+    top  : 14px;
+    left : 14px;
+  }
+  41.6666666666% {
+
+  }
+  50% {
+    top  : 14px;
+    left : 14px;
+  }
+  58.3333333333% {
+    top  : 0;
+    left : 14px;
+  }
+  66.6666666666% {
+
+  }
+  75% {
+    top  : 0;
+    left : 14px;
+  }
+  83.3333333333% {
+    top  : 0;
+    left : 0;
+  }
+  91.6666666666% {
+
+  }
+  100% {
+
+  }
+}
+
+
+@-webkit-keyframes dotTwoKeyframes {
+  0% {
+    top  : 0;
+    left : 14px;
+  }
+  8.3333333333% {
+    top  : 0;
+    left : 0;
+  }
+  16.6666666666% {
+
+  }
+  25% {
+    top  : 0;
+    left : 0;
+  }
+  33.3333333333% {
+    top  : 14px;
+    left : 0;
+  }
+  41.6666666666% {
+
+  }
+  50% {
+    top  : 14px;
+    left : 0;
+  }
+  58.3333333333% {
+    top  : 14px;
+    left : 14px;
+  }
+  66.6666666666% {
+
+  }
+  75% {
+    top  : 14px;
+    left : 14px;
+  }
+  83.3333333333% {
+    top  : 0;
+    left : 14px;
+  }
+  91.6666666666% {
+
+  }
+  100% {
+
+  }
+}
+
+@-webkit-keyframes dotThreeKeyframes {
+  0% {
+    top  : 14px;
+    left : 14px;
+  }
+  8.3333333333% {
+    top  : 0;
+    left : 14px;
+  }
+  16.6666666666% {
+
+  }
+  25% {
+    top  : 0;
+    left : 14px;
+  }
+  33.3333333333% {
+    top  : 0;
+    left : 0;
+  }
+  41.6666666666% {
+
+  }
+  50% {
+    top  : 0;
+    left : 0;
+  }
+  58.3333333333% {
+    top  : 14px;
+    left : 0;
+  }
+  66.6666666666% {
+
+  }
+  75% {
+    top  : 14px;
+    left : 0;
+  }
+  83.3333333333% {
+    top  : 14px;
+    left : 14px;
+  }
+  91.6666666666% {
+
+  }
+  100% {
+
   }
 }

@@ -4,6 +4,9 @@ html, body {
   padding: 0;
   font-family: 'Karla', sans-serif; }
 
+body {
+  background: #eee; }
+
 p, h4, span, ul, li {
   margin: 0;
   padding: 0; }
@@ -16,31 +19,201 @@ a {
   width: 100%;
   height: 100%; }
   .places__info {
-    height: 200px;
     padding-left: 10px; }
+  .places__name {
+    margin: 5px 0 0;
+    font-size: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
   .places__list {
     padding: 0;
-    margin: 0;
+    margin: 10px 0 20px;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly; }
   .places__card {
-    background: #eee;
     width: 48%;
-    height: 400px;
-    margin-top: 5px; }
+    background: #fefefe;
+    margin-top: 5px;
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+    transform: none;
+    transition: all 0.25s ease; }
+    .places__card:hover, .places__card:focus-within {
+      transform: scale(1.01);
+      box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.4); }
   .places__image {
     width: 100%;
-    height: 200px;
+    height: 280px;
     background-image: url("../London-Eye-2009.jpg");
     background-size: cover;
     background-position: center; }
   .places__location {
     color: #666;
     font-size: 13px;
-    text-transform: uppercase; }
-  .places__rating-star {
-    height: 10px; }
+    text-transform: uppercase;
+    margin: 5px 0 0; }
+  .places__distance {
+    font-size: 14px;
+    color: #FF5722; }
+    .places__distance-info-box {
+      display: flex;
+      justify-content: start;
+      align-items: baseline;
+      margin-top: 5px; }
+  .places__rating {
+    margin-right: 25px; }
+    .places__rating-star {
+      height: 10px; }
+  .places__type {
+    color: #666;
+    margin: 5px;
+    padding: 2px 10px;
+    border-radius: 5px;
+    border: 2px solid #666;
+    cursor: pointer;
+    transform: none;
+    transition: all 0.2s ease; }
+    .places__type:hover {
+      transform: scale(1.05);
+      color: black;
+      border: 2px solid black; }
+    .places__type:first-child {
+      margin-left: 0; }
+    .places__type-list {
+      list-style: none;
+      display: flex;
+      justify-content: end; }
+
+.loading {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  background-color: #eee;
+  z-index: 99;
+  opacity: 1;
+  transition: opacity 1s ease; }
+  .loading--inactive {
+    opacity: 0; }
+  .loading--stopped {
+    display: none; }
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%); }
+
+.dot {
+  background: black;
+  border-radius: 100%;
+  color: white;
+  height: 8px;
+  line-height: 8px;
+  text-align: center;
+  width: 8px; }
+
+.dotOne {
+  -webkit-animation: dotOneKeyframes 5s ease  infinite;
+  background: #FF5722;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.dotTwo {
+  -webkit-animation: dotTwoKeyframes 5s ease 0.4166666666666s infinite;
+  background: #FF5722;
+  position: absolute;
+  top: 0;
+  left: 14px; }
+
+.dotThree {
+  -webkit-animation: dotThreeKeyframes 5s ease 0.83333333333s infinite;
+  background: #FF5722;
+  position: absolute;
+  top: 14px;
+  left: 14px; }
+
+@-webkit-keyframes dotOneKeyframes {
+  0% {
+    top: 0;
+    left: 0; }
+  8.3333333333% {
+    top: 14px;
+    left: 0; }
+  25% {
+    top: 14px;
+    left: 0; }
+  33.3333333333% {
+    top: 14px;
+    left: 14px; }
+  50% {
+    top: 14px;
+    left: 14px; }
+  58.3333333333% {
+    top: 0;
+    left: 14px; }
+  75% {
+    top: 0;
+    left: 14px; }
+  83.3333333333% {
+    top: 0;
+    left: 0; } }
+@-webkit-keyframes dotTwoKeyframes {
+  0% {
+    top: 0;
+    left: 14px; }
+  8.3333333333% {
+    top: 0;
+    left: 0; }
+  25% {
+    top: 0;
+    left: 0; }
+  33.3333333333% {
+    top: 14px;
+    left: 0; }
+  50% {
+    top: 14px;
+    left: 0; }
+  58.3333333333% {
+    top: 14px;
+    left: 14px; }
+  75% {
+    top: 14px;
+    left: 14px; }
+  83.3333333333% {
+    top: 0;
+    left: 14px; } }
+@-webkit-keyframes dotThreeKeyframes {
+  0% {
+    top: 14px;
+    left: 14px; }
+  8.3333333333% {
+    top: 0;
+    left: 14px; }
+  25% {
+    top: 0;
+    left: 14px; }
+  33.3333333333% {
+    top: 0;
+    left: 0; }
+  50% {
+    top: 0;
+    left: 0; }
+  58.3333333333% {
+    top: 14px;
+    left: 0; }
+  75% {
+    top: 14px;
+    left: 0; }
+  83.3333333333% {
+    top: 14px;
+    left: 14px; } }
 
 /*# sourceMappingURL=style.css.map */
