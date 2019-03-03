@@ -1,21 +1,23 @@
 html, body {
   height: 100%;
   margin: 0;
+  padding: 0;
+  font-family: 'Karla', sans-serif; }
+
+p, h4, span, ul, li {
+  margin: 0;
   padding: 0; }
 
-.map-container {
-  width: 50%;
-  height: 100%;
-  float: left;
-  position: fixed; }
-  .map-container #map {
-    width: 100%;
-    height: 100%; }
+a {
+  color: black;
+  text-decoration: none; }
 
 .places {
-  width: 50%;
-  height: 100%;
-  float: right; }
+  width: 100%;
+  height: 100%; }
+  .places__info {
+    height: 200px;
+    padding-left: 10px; }
   .places__list {
     padding: 0;
     margin: 0;
@@ -26,7 +28,19 @@ html, body {
   .places__card {
     background: #eee;
     width: 48%;
-    height: 200px;
+    height: 400px;
     margin-top: 5px; }
+  .places__image {
+    width: 100%;
+    height: 200px;
+    background-image: url("../London-Eye-2009.jpg");
+    background-size: cover;
+    background-position: center; }
+  .places__location {
+    color: #666;
+    font-size: 13px;
+    text-transform: uppercase; }
+  .places__rating-star {
+    height: 10px; }
 
 /*# sourceMappingURL=style.css.map */

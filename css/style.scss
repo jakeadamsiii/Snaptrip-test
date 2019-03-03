@@ -2,24 +2,27 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Karla', sans-serif;
 }
 
-.map-container{
-  width:50%;
-  height:100%;
-  float:left;
-  position: fixed;
-  #map {
-    width:100%;
-    height:100%;
-  }
+p, h4, span, ul, li{
+  margin:0;
+  padding:0;
 }
 
+a{
+  color:black;
+  text-decoration: none;
+}
 
 .places{
-  width:50%;
+  width:100%;
   height: 100%;
-  float:right;
+
+  &__info{
+    height:200px;
+    padding-left: 10px;
+  }
 
   &__list{
     padding:0;
@@ -33,8 +36,27 @@ html, body {
   &__card{
     background: #eee;
     width:48%;
-    height:200px;
+    height:400px;
     margin-top:5px;
+  }
 
+  &__image{
+    width:100%;
+    height:200px;
+    background-image: url('../London-Eye-2009.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__location{
+    color: #666;
+    font-size: 13px;
+    text-transform: uppercase;
+  }
+
+  &__rating{
+    &-star{
+      height:10px;
+    }
   }
 }
