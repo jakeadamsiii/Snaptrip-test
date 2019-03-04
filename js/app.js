@@ -63,7 +63,7 @@ function formatUrl(){
            //CORS issue - no access control allow origin header on local host
            //TODO - fix error or see if the error continues once hosted.
            function getPhotoUrl(place){
-              getJSON('https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU',
+              getJSON('https://cors.io/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU',
               function(err, data) {
                 if (err !== null) {
                   console.log('Something went wrong: ' + err);
@@ -113,7 +113,7 @@ function formatUrl(){
 
              if(website){
                placeContent = `
-                  <li class="places__card">
+                  <li class="places__card" data-distance="${parseInt(distanceFromMe)}" data-rating="${place.rating}">
                     <a href='${website}' target='_blank'>
                       <div class="places__image"></div>
                       <div class='places__info'>
@@ -132,7 +132,7 @@ function formatUrl(){
                 `
              }else{
                placeContent = `
-               <li class="places__card">
+                  <li class="places__card" data-distance="${parseInt(distanceFromMe)}" data-rating="${place.rating}">
                  <div class="places__image"></div>
                  <div class='places__info'>
                    <p class="places__location">${place.vicinity}</p>
@@ -192,3 +192,31 @@ function getLocation() {
 }
 
 formatUrl();
+
+var distanceButton = document.querySelector('.distance-btn');
+var ratingButton = document.querySelector('.rating-btn');
+
+distanceButton.addEventListener("click", sortClick);
+ratingButton.addEventListener("click", sortClick);
+
+function sortClick(e){
+  var parameter = ''
+
+  var listItems = document.querySelectorAll('.places__card');
+  var placesList = document.querySelector('.places__list');
+  e.target === distanceButton ? parameter = 'distance' :parameter = 'rating';
+
+  var listArr = [].slice.call(listItems).sort(function(a, b) {
+    return +b.getAttribute(`data-${parameter}`) - +a.getAttribute(`data-${parameter}`);
+  });
+
+  console.log(parameter, listArr)
+
+  while (placesList.firstChild) {
+    placesList.removeChild(placesList.firstChild);
+  }
+
+  listArr.forEach(function (p) {
+      placesList.appendChild(p);
+  });
+}

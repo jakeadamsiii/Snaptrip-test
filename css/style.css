@@ -28,7 +28,7 @@ a {
     white-space: nowrap; }
   .places__list {
     padding: 0;
-    margin: 20px 2%;
+    margin: 70px 2% 20px;
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -87,6 +87,20 @@ a {
       display: flex;
       justify-content: end;
       flex-wrap: wrap; }
+
+.navigation {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  background: white;
+  top: 0;
+  box-shadow: 0px 1px 10px #999;
+  z-index: 10; }
+  .navigation span, .navigation button {
+    margin-left: 20px;
+    font-size: 15px; }
 
 .loading {
   width: 100%;
