@@ -71,6 +71,32 @@ a{
     background-image: url('../London-Eye-2009.jpg');
     background-size: cover;
     background-position: center;
+    position: relative;
+  }
+
+  &__opening{
+    position: absolute;
+    top: 15px;
+    right: 0;
+    border-top-left-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 15px;
+    &--open{
+      background: green;
+    }
+    &--closed{
+      background:#850000;
+    }
+    svg{
+      margin: 0 5px 0 10px;
+      height: 25px;
+    }
+    span{
+      margin: 0 5px;
+      color:#fefefe;
+    }
   }
 
   &__location{
@@ -105,6 +131,7 @@ a{
     border-radius: 5px;
     border: 2px solid $grey;
     cursor: pointer;
+    background:transparent;
     transform:none;
     transition: all 0.2s ease;
     text-overflow: ellipsis;

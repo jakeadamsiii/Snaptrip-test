@@ -100,7 +100,25 @@ function formatUrl(){
             	else if (d<=1) return Math.round(d*1000)+"m";
             	return d;
             }
+            
             var ratingContent ='';
+            var openingContent ='';
+            if(place.opening_hours){
+              if(place.opening_hours.open_now === true){
+                openingContent = `
+                <div class='places__opening places__opening--open'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#2bcf1c" stroke-width="3" stroke-linecap="square" stroke-linejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Open Now</span>
+                </div>`
+              }else{
+                openingContent = `
+                <div class='places__opening places__opening--closed'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#cf1c1c" stroke-width="3" stroke-linecap="square" stroke-linejoin="arcs"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                <span>Closed</span>
+                </div>`
+              }
+            }
+
             if(place.rating){
               ratingContent =`
               <p class="places__rating">
@@ -115,7 +133,9 @@ function formatUrl(){
                placeContent = `
                   <li class="places__card" data-distance="${parseInt(distanceFromMe)}" data-rating="${place.rating}">
                     <a href='${website}' target='_blank'>
-                      <div class="places__image"></div>
+                    <div class="places__image">
+                      ${openingContent}
+                    </div>
                       <div class='places__info'>
                         <p class="places__location">${place.vicinity}</p>
                         <h4 class="places__name">${place.name}</h4>
@@ -133,7 +153,9 @@ function formatUrl(){
              }else{
                placeContent = `
                   <li class="places__card" data-distance="${parseInt(distanceFromMe)}" data-rating="${place.rating}">
-                 <div class="places__image"></div>
+                  <div class="places__image">
+                    ${openingContent}
+                   </div>
                  <div class='places__info'>
                    <p class="places__location">${place.vicinity}</p>
                    <h4 class="places__name">${place.name}</h4>
