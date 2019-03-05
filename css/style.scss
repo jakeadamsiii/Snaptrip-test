@@ -25,6 +25,25 @@ a{
   text-decoration: none;
 }
 
+.btn{
+  color:$grey;
+  margin:$uniformMargin;
+  padding: 2px 10px;
+  border-radius: 5px;
+  border: 2px solid $grey;
+  cursor: pointer;
+  background:transparent;
+  transform:none;
+  transition: all 0.2s ease;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  &:hover{
+    transform:scale(1.05);
+    color: black;
+    border: 2px solid black;
+  }
+}
+
 .places{
   width:100%;
   height: 100%;
@@ -37,8 +56,6 @@ a{
     margin: $uniformMargin 0 0;
     font-size: 25px;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   &__list{
@@ -125,22 +142,6 @@ a{
   }
 
   &__type{
-    color:$grey;
-    margin:$uniformMargin;
-    padding: 2px 10px;
-    border-radius: 5px;
-    border: 2px solid $grey;
-    cursor: pointer;
-    background:transparent;
-    transform:none;
-    transition: all 0.2s ease;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    &:hover{
-      transform:scale(1.05);
-      color: black;
-      border: 2px solid black;
-    }
 
     &:first-child{
       margin-left:0;
@@ -148,7 +149,7 @@ a{
     &-list{
       list-style: none;
       display: flex;
-      justify-content: end;
+      justify-content: baseline;
       flex-wrap: wrap;
     }
   }

@@ -20,11 +20,9 @@ function formatUrl(){
   getLocation()
    .then((position) => {
      userLatLng = [position.coords.latitude,position.coords.longitude];
-     //console.log(userLatLng);
      generateUrl(userLatLng);
    })
    .catch((err) => {
-     console.error(err.message);
      userLatLng = [51.508596, -0.108000];
      generateUrl(userLatLng);
    });
@@ -80,7 +78,7 @@ function formatUrl(){
              let typeOfArr = place.types.slice(0,3);
              var newArr=[];
              typeOfArr.forEach(type=>{
-               var typeLi = `<li class="places__type">${type.replace(/_/g,' ')}</li>`;
+               var typeLi = `<li class="places__type btn">${type.replace(/_/g,' ')}</li>`;
                newArr.push(typeLi);
              });
 
@@ -131,7 +129,7 @@ function formatUrl(){
 
              if(website){
                placeContent = `
-                  <li class="places__card" data-distance="${parseInt(distanceFromMe)}" data-rating="${place.rating}">
+                  <li class="places__card" data-distance="${parseInt(distanceFromMe.replace(/km/gi,'000'))}" data-rating="${place.rating}">
                     <a href='${website}' target='_blank'>
                     <div class="places__image">
                       ${openingContent}
@@ -152,7 +150,7 @@ function formatUrl(){
                 `
              }else{
                placeContent = `
-                  <li class="places__card" data-distance="${parseInt(distanceFromMe)}" data-rating="${place.rating}">
+                  <li class="places__card" data-distance="${parseInt(distanceFromMe.replace(/km/gi,'000'))}" data-rating="${place.rating}">
                   <div class="places__image">
                     ${openingContent}
                    </div>
@@ -217,27 +215,34 @@ formatUrl();
 
 var distanceButton = document.querySelector('.distance-btn');
 var ratingButton = document.querySelector('.rating-btn');
-
 distanceButton.addEventListener("click", sortClick);
 ratingButton.addEventListener("click", sortClick);
 
+//generic sorting function that will sort high to low for both distance and rating 
 function sortClick(e){
   var parameter = ''
-
   var listItems = document.querySelectorAll('.places__card');
   var placesList = document.querySelector('.places__list');
-  e.target === distanceButton ? parameter = 'distance' :parameter = 'rating';
+  if(e.target === distanceButton){
+    parameter = 'distance';
+    var listArr = [].slice.call(listItems).sort(function(a, b) {
+      return +a.getAttribute(`data-${parameter}`) - +b.getAttribute(`data-${parameter}`);
+    });
+  }else{
+    parameter = 'rating';
+    var listArr = [].slice.call(listItems).sort(function(a, b) {
+      return +b.getAttribute(`data-${parameter}`) - +a.getAttribute(`data-${parameter}`);
+    });
+  }
 
-  var listArr = [].slice.call(listItems).sort(function(a, b) {
-    return +b.getAttribute(`data-${parameter}`) - +a.getAttribute(`data-${parameter}`);
-  });
 
-  console.log(parameter, listArr)
 
+  //remove all children
   while (placesList.firstChild) {
     placesList.removeChild(placesList.firstChild);
   }
 
+  //add new sorted list
   listArr.forEach(function (p) {
       placesList.appendChild(p);
   });
