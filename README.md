@@ -1,5 +1,11 @@
 # Snaptrip-test
 
+npm i
+
+npm run build to view on localhost:8080
+
+view compiled code at: https://www.flancrestenterprises.co.uk/
+
 The test
 
 1. Use the Google Places API to display equal sized responsive tourist information cards on a responsive web page (like our property cards on www.snaptrip.com/top-deals - but with tourism details) https://developers.google.com/places/web-service/search. You’ll need to sign up to Google Developers and get a places API key.
