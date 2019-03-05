@@ -43,12 +43,10 @@ function formatUrl(){
          let places = data.results;
          //for every place we need to fetch photos, find website and generate the html
          places.forEach(place=>{
-           console.log(place)
            //find webite using seperate json request
            let website = getJSON(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?placeid=${place.place_id}&fields=website&key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU`,
            function(err, data){
                if (err !== null) {
-                 console.log('Something went wrong: ' + err);
                  let website = null;
                  getPhotoUrl(place)
                  generateHTML(place, website, latLng)
@@ -61,14 +59,14 @@ function formatUrl(){
            //CORS issue - no access control allow origin header on local host
            //TODO - fix error or see if the error continues once hosted.
            function getPhotoUrl(place){
-              getJSON('https://cors.io/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU',
-              function(err, data) {
-                if (err !== null) {
-                  console.log('Something went wrong: ' + err);
-                } else {
-                  console.log(data)
-                }
-              });
+              // getJSON('https://cors.io/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_SlcHxYq1yL4KbKUv3qtWgTK0A6QbGh87GB3sscrHRIQiG2RrmU_jF4tENr9wGS_YxoUSSDrYjWmrNfeEHSGSc3FyhNLlBU&key=AIzaSyD137cSJRa1LV_8djUKFlUeGgHd9MNh4FU',
+              // function(err, data) {
+              //   if (err !== null) {
+              //     console.log('Something went wrong: ' + err);
+              //   } else {
+              //     console.log(data)
+              //   }
+              //});
            }
 
            //function to generate the html
@@ -99,7 +97,7 @@ function formatUrl(){
             	return d;
             }
             
-            var ratingContent ='';
+            //generate opening hrs html
             var openingContent ='';
             if(place.opening_hours){
               if(place.opening_hours.open_now === true){
@@ -117,6 +115,8 @@ function formatUrl(){
               }
             }
 
+            //generate ratings html if a place has ratings
+            var ratingContent ='';
             if(place.rating){
               ratingContent =`
               <p class="places__rating">
@@ -127,45 +127,36 @@ function formatUrl(){
               `
             }
 
+            var innerLink=`
+            <div class="places__image">
+            ${openingContent}
+          </div>
+            <div class='places__info'>
+              <p class="places__location">${place.vicinity}</p>
+              <h4 class="places__name">${place.name}</h4>
+              <div class="places__distance-info-box">
+                  ${ratingContent}
+                <p class="places__distance">${distanceFromMe} away</p>
+              </div>
+              <ul class="places__type-list">
+                ${newArr.join('')}
+              </ul>
+            </div>`;
+
+
              if(website){
                placeContent = `
                   <li class="places__card" data-distance="${parseInt(distanceFromMe.replace(/km/gi,'000'))}" data-rating="${place.rating}">
                     <a href='${website}' target='_blank'>
-                    <div class="places__image">
-                      ${openingContent}
-                    </div>
-                      <div class='places__info'>
-                        <p class="places__location">${place.vicinity}</p>
-                        <h4 class="places__name">${place.name}</h4>
-                        <div class="places__distance-info-box">
-                            ${ratingContent}
-                          <p class="places__distance">${distanceFromMe} away</p>
-                        </div>
-                        <ul class="places__type-list">
-                          ${newArr.join('')}
-                        </ul>
-                      </div>
+                      ${innerLink}
                     </a>
                   </li>
                 `
              }else{
                placeContent = `
                   <li class="places__card" data-distance="${parseInt(distanceFromMe.replace(/km/gi,'000'))}" data-rating="${place.rating}">
-                  <div class="places__image">
-                    ${openingContent}
-                   </div>
-                 <div class='places__info'>
-                   <p class="places__location">${place.vicinity}</p>
-                   <h4 class="places__name">${place.name}</h4>
-                   <div class="places__distance-info-box">
-                   ${ratingContent}
-                   <p class="places__distance">${distanceFromMe} away</p>
-                 </div>
-                   <ul class="places__type-list">
-                     ${newArr.join('')}
-                   </ul>
-                 </div>
-               </li>`
+                     ${innerLink}
+                  </li>`
              }
 
               document.querySelector('.places__list').insertAdjacentHTML('afterbegin', placeContent);
@@ -234,8 +225,6 @@ function sortClick(e){
       return +b.getAttribute(`data-${parameter}`) - +a.getAttribute(`data-${parameter}`);
     });
   }
-
-
 
   //remove all children
   while (placesList.firstChild) {
